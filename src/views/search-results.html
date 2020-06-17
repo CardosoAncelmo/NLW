@@ -1,0 +1,53 @@
+{%extends "layout.html" %}  <!--chama o layout.html com nunjucks-->
+
+{% set pageId = "page-search-results" %}
+
+{% block title %}   <!--chama no bloco conteudo do titulo caso nao tenha nada exibe titulo padrão -->
+<title>Resultado da pesquisa</title>
+{% endblock title %}
+
+{% block styles %}
+<link rel="stylesheet" href="/stilo/search-results.css">
+{% endblock styles %}
+
+{% block content %}
+
+{% include "partes/page-header.html"%}  <!--chama modelo de conteudo para tela-->
+
+
+<main>
+
+    {% if total > 0 %}
+
+    <h4>
+        <strong>{{total}} pontos</strong> encotrados
+    </h4>
+
+    <div class="cards">
+
+      {% for place in lugares %}
+
+      <div class="card">
+        <img src="{{ place.image}}" alt="{{place.name}}">
+        <h1>{{place.nome}}</h1>
+        <h3>{{ place.items}}</h3>
+        <p>
+           {{place.city}}, {{place.state}} <br />
+            {{place.address}} <br />
+            {{place.address2}}
+        </p>
+    </div>
+
+      {% endfor %}
+
+        
+    </div>
+
+    {%else%}
+
+    <h4> <strong>Nenhum</strong> item encontrado</h4>
+
+    {% endif %}
+
+</main>
+{% endblock content %}
